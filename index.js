@@ -1,4 +1,4 @@
-function gameObject() {
+ function gameObject() {
     return {
         home: {
             teamName: "Brooklyn Nets",
@@ -114,3 +114,97 @@ function gameObject() {
         },
     };
 }
+
+const game = gameObject();
+
+// takes a players name and returns the number of points scored by that player
+function numPointsScored(playerName){
+    if (game.home.players[playerName]){
+         return game.home.players[playerName].points;
+    }else if (game.away.players[playerName]){
+        return game.away.players[playerName].points;
+    }else{
+        return "Player not found";
+    }
+
+};
+// take a player's name and returns the shoe size of that player
+function shoeSize(playerName){
+    if (game.home.players[playerName]){
+        return game.home.players[playerName].shoe;
+    }else if (game.away.players[playerName]){
+        return game.away.players[playerName].shoe;
+    }else{
+        return "Player not found";
+    }
+    };
+
+// take a team name and returns an array of that teams colors
+function teamColors(teamName){
+    if (game.home.teamName === teamName){
+        return game.home.colors;
+    }else if (game.away.teamName === teamName){
+        return game.away.colors;
+    }else{
+        return "Team not found";
+    }
+};
+
+function teamNames(){
+    const teamNames = [];
+    teamNames.push(game.home.teamName);
+    teamNames.push(game.away.teamName);
+    return teamNames;
+}
+//  takes a team name as input and return an array of all players jersey numbers on that team.
+function playerNumbers(teamName){
+    const playersNumbers = [];
+    if (game.home.teamName === teamName){
+        for (const player in game.home.players){
+            playersNumbers.push(game.home.players[player].number);
+    }}else if (game.away.teamName === teamName){
+        for (const player in game.away.players){
+            playersNumbers.push(game.away.players[player].number);
+            }
+        }
+    return playersNumbers;
+    }
+
+// Takes a players name as input and returns object with all stats for that player.
+function playerStats(playerName){
+    return game.home.players[playerName] || game.away.players[playerName] || "Player not found";
+};
+
+// Advanced//Challenge
+// Returns the number of rebounds for the player with the largest shoe size.
+function bigShoeRebounds(){
+    let biggestShoeSize = 0;
+    let rebounds = 0;
+    for (const team in game){
+        for (const player in game[team].players){
+            if (game[team].players[player].shoe > biggestShoeSize){
+                biggestShoeSize = game[team].players[player].shoe;
+                rebounds = game[team].players[player].rebounds;
+            }
+        }
+    }
+    return rebounds;
+};
+
+
+
+
+
+
+
+
+// // Tesing my functions
+
+
+// numPointsScored("Jeff Adrien");
+// shoeSize("Jeff Adrien");
+// teamColors("Charlotte Hornets");
+// teamNames();
+// playerNumbers("Brooklyn Nets");
+// playerStats("Jeff Adrien");
+// bigShoeRebounds();
